@@ -1,15 +1,19 @@
 <html>
 
 <head>
-    <title>Excel</title>
+    <title>Excel export</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
 <body ng-app="app" ng-controller="AppController as app">
-    <h1>Excel</h1>
+    <label class="btn btn-primary col-md-6" for="my-file-selector">
     <input 
+        id="my-file-selector"
         type="file"
+        style="display:none;"
         onchange="angular.element(this).scope().app.onFileChanged(event)"/>
+    Upload file
+</label>
     <button id="btnExport" class="btn btn-success col-md-6" style="float: right">Export to xls</button>
 
     <div ng-if="app.table">
