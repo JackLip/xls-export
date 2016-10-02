@@ -1,0 +1,107 @@
+<html>
+
+<head>
+    <title>Excel</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body ng-app="app" ng-controller="AppController as app">
+    <h1>Excel</h1>
+    <input 
+        type="file"
+        onchange="angular.element(this).scope().app.onFileChanged(event)"/>
+
+    <div ng-if="app.table">
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td ng-repeat="head in app.table.heads">
+                                <input 
+                                    type="text" 
+                                    ng-model="app.filter[head]"
+                                    class="form-control" 
+                                    ng-keypress="app.submitAllRows($event)"
+                                    placeholder="{{head}}">
+                            </td>
+                            <td>
+                                <button class="btn btn-warning" ng-click="app.filter = {}">Reset</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th ng-repeat="head in app.table.heads">
+                                {{head}}
+                            </th>
+                            <th>
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr 
+                            ng-repeat="
+                                row in app.table.rows 
+                                | filter:app.filter 
+                                | notIn:app.exportable.rows 
+                                track by $index"
+                        >
+                            <td ng-repeat="head in app.table.heads">
+                                {{row[head]}}
+                            </td>
+                            <td>
+                                <button 
+                                    class="btn btn-success" 
+                                    ng-click="app.addRow(row)" 
+                                >
+                                    Add
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-6">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th ng-repeat="head in app.table.heads">
+                                {{head}}
+                            </th>
+                            <th>
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="row in app.exportable.rows">
+                            <td ng-repeat="head in app.table.heads">
+                                {{row[head]}}
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" ng-click="app.removeRow(row)">Remove</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
