@@ -10,6 +10,7 @@
     <input 
         type="file"
         onchange="angular.element(this).scope().app.onFileChanged(event)"/>
+    <button id="btnExport" class="btn btn-success col-md-6" style="float: right">Export to xls</button>
 
     <div ng-if="app.table">
         <div class="row">
@@ -71,7 +72,7 @@
                 </table>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6" id="table_wrapper">
                 <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
@@ -102,6 +103,7 @@
     <script src="xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
     <script src="script.js"></script>
+    <script src="export.js"></script>
 </body>
 
 </html>
