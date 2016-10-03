@@ -7,13 +7,13 @@
 
 <body ng-app="app" ng-controller="AppController as app">
     <label class="btn btn-primary col-md-6" for="my-file-selector">
-    <input 
-        id="my-file-selector"
-        type="file"
-        style="display:none;"
-        onchange="angular.element(this).scope().app.onFileChanged(event)"/>
-    Upload file
-</label>
+        <input 
+            id="my-file-selector"
+            type="file"
+            style="display:none;"
+            onchange="angular.element(this).scope().app.onFileChanged(event)"/>
+        Upload file
+    </label>
     <button id="btnExport" class="btn btn-success col-md-6" style="float: right">Export to xls</button>
 
     <div ng-if="app.table">
